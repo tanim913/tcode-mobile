@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      The Play flavour deliberately declares no storage permission.
+
+      Everything outside the app's own sandbox is reached through the Storage
+      Access Framework, where the user grants access per folder and that grant
+      is persisted. Nothing here needs to be added for that to work.
+    -->
+</manifest>

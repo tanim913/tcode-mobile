@@ -1,0 +1,91 @@
+# Static analysis configuration for PocketCode.
+#
+# Stricter than the flutter_lints default on purpose: this codebase is large,
+# layered, and long-lived, so the analyzer is doing the job a code reviewer
+# would otherwise have to do by hand on every change.
+#
+# The bar is: `flutter analyze` reports zero errors AND zero warnings.
+
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - web/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+
+  language:
+    # Refuse implicit downcasts from dynamic. Without this, a stray `dynamic`
+    # from JSON decoding silently propagates and blows up at runtime instead.
+    strict-casts: true
+    # Refuse to infer `dynamic` when a type argument is omitted.
+    strict-raw-types: true
+    # Refuse to infer types from context when the result would be dynamic.
+    strict-inference: true
+
+  errors:
+    # An unawaited Future in file-system code means a write that may not have
+    # landed. Promote it from a hint to a hard failure.
+    unawaited_futures: error
+    # Dead code and unused pieces mean a refactor was left half-done.
+    unused_import: error
+    unused_local_variable: error
+    unused_element: error
+    dead_code: error
+
+linter:
+  rules:
+    # --- Correctness ---------------------------------------------------------
+    always_declare_return_types: true
+    avoid_dynamic_calls: true
+    # avoid_slow_async_io is deliberately NOT enabled. It tells you to prefer
+    # File.existsSync() over File.exists(), which is sound advice for a CLI but
+    # wrong here: synchronous file I/O blocks the isolate, and on the UI isolate
+    # that is a dropped frame. We take the dispatch overhead and stay async;
+    # genuinely heavy walks go to a background isolate instead (io_bulk_worker).
+    cancel_subscriptions: true
+    close_sinks: true
+    comment_references: false
+    literal_only_boolean_expressions: true
+    no_adjacent_strings_in_list: true
+    throw_in_finally: true
+    unnecessary_statements: true
+    test_types_in_equals: true
+
+    # --- Flutter performance -------------------------------------------------
+    # This app rebuilds a tree of thousands of rows; const constructors are the
+    # cheapest possible win and easy to forget.
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    use_colored_box: true
+    use_decorated_box: true
+
+    # --- API design ----------------------------------------------------------
+    avoid_positional_boolean_parameters: true
+    prefer_final_fields: true
+    prefer_final_locals: true
+    prefer_final_in_for_each: true
+    use_super_parameters: true
+    use_enums: true
+    unnecessary_parenthesis: true
+    unnecessary_lambdas: true
+    avoid_redundant_argument_values: true
+
+    # --- Consistency ---------------------------------------------------------
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    directives_ordering: true
+    # sort_constructors_first is deliberately NOT enabled. Data models read
+    # best with `fromJson` next to `toJson`, and the rule forces the factory up
+    # above the fields it parses into, splitting the pair. Constructor-first
+    # ordering is still the convention for widgets and services.
+    combinators_ordering: true
+    curly_braces_in_flow_control_structures: true
+
+    # --- Not negotiable for this project -------------------------------------
+    # Rule 4 of the brief: no telemetry, no logging user file paths to stdout.
+    avoid_print: true

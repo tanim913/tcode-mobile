@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptive-icon background layer. A shape rather than a PNG so it stays crisp at
+  every launcher mask and costs nothing in the APK.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="#1B222E"
+        android:endColor="#0D1016"
+        android:type="linear" />
+</shape>

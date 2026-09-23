@@ -1,0 +1,84 @@
+name: pocket_code
+description: "A touch-first code editor for Android. Offline, no telemetry."
+publish_to: 'none'
+
+# Displayed app version. Android maps these to versionName / versionCode.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # --- State + dependency injection -----------------------------------------
+  # One tool for both. Lets tests swap the real file system for a fake by
+  # overriding a single provider, which is why it beats plain setState here.
+  flutter_riverpod: ^3.4.3
+
+  # --- Editor engine --------------------------------------------------------
+  # Ships code folding, find/replace and a controller that exposes cursor,
+  # selection and scroll. Wrapped behind our own interface so it stays swappable.
+  re_editor: ^0.10.0
+  re_highlight: ^0.0.3      # highlight.js grammars ported to Dart (~190 languages)
+
+  # --- Files and platform ---------------------------------------------------
+  path: ^1.9.1              # pure-Dart path maths; works on web, unlike dart:io's
+  path_provider: ^2.1.6     # the correct way to locate app-private directories
+  file_picker: ^12.3.0      # native folder/file pickers; the front door to SAF on Android
+  share_plus: ^13.3.0       # platform share sheet
+
+  # --- Persistence ----------------------------------------------------------
+  shared_preferences: ^2.5.5  # small scalar settings only; structured state goes to JSON files
+
+  # --- Content --------------------------------------------------------------
+  archive: ^4.2.0             # pure-Dart ZIP, so it can run inside an isolate
+  flutter_markdown_plus: ^1.0.12  # maintained fork; the original flutter_markdown is dead
+
+  # --- Web target -----------------------------------------------------------
+  # Typed DOM bindings for the browser file provider. Note: package:web does not
+  # expose showDirectoryPicker, directory iteration, the permission methods or
+  # OPFS, so services/filesystem/web/fs_interop.dart hand-writes those.
+  web: ^1.1.1
+
+  cupertino_icons: ^1.0.8
+  webview_flutter: ^4.14.1
+  flutter_secure_storage: ^11.2.0
+  crypto: ^3.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  file: ^7.0.1              # MemoryFileSystem, for file-operation unit tests
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # The MicroPython WebAssembly runtime, MIT licensed. Shipped rather than
+    # fetched because the app must run Python with no network at all.
+    # LICENSE beside them records the source and version.
+    - assets/micropython/
+
+  # Bundled so the editor renders identically with no network access.
+  fonts:
+    - family: JetBrains Mono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Regular.ttf
+        - asset: assets/fonts/JetBrainsMono-Italic.ttf
+          style: italic
+        - asset: assets/fonts/JetBrainsMono-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/JetBrainsMono-BoldItalic.ttf
+          weight: 700
+          style: italic
+    # Fira Code has no true italic face; Flutter will synthesise one if asked.
+    - family: Fira Code
+      fonts:
+        - asset: assets/fonts/FiraCode-Regular.ttf
+        - asset: assets/fonts/FiraCode-Bold.ttf
+          weight: 700

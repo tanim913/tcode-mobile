@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Paths the FileProvider may hand out, and nothing more.
+
+  Only the cache subdirectory the app writes share copies into is exposed. The
+  Projects folder is deliberately NOT listed: "Open with" copies the bytes to
+  cache first, so another app never gets a handle on the user's working file.
+-->
+<paths>
+    <cache-path name="shared" path="shared/" />
+</paths>
