@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tcode Mobile | Free code editor for Android</title>
+  <meta name="description" content="Tcode Mobile is a free, open-source code editor for Android. Edit code in 27 languages, run HTML, JavaScript and Python offline, and send changes to GitHub as pull requests. No ads, no account, no tracking.">
+  <link rel="canonical" href="https://tanim913.github.io/tcode-mobile/">
+  <meta name="theme-color" content="#0F1217">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tcode Mobile">
+  <meta property="og:title" content="Tcode Mobile: a real code editor for your phone">
+  <meta property="og:description" content="Free and open source. Edit, run and share code on Android, even offline.">
+  <meta property="og:url" content="https://tanim913.github.io/tcode-mobile/">
+  <meta property="og:image" content="https://tanim913.github.io/tcode-mobile/social-preview.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tcode Mobile",
+    "operatingSystem": "Android 7.0 or newer",
+    "applicationCategory": "DeveloperApplication",
+    "description": "A free, open-source, touch-first code editor for Android that works offline.",
+    "url": "https://tanim913.github.io/tcode-mobile/",
+    "downloadUrl": "https://github.com/tanim913/tcode-mobile/releases/latest",
+    "codeRepository": "https://github.com/tanim913/tcode-mobile",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": {"@type": "Person", "name": "tanim913", "url": "https://github.com/tanim913"},
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0F1217; --surface: #161A21; --raised: #1C212A; --line: #262C36;
+      --text: #E8ECF2; --muted: #9AA4B5; --accent: #4D9FFF; --on-accent: #06121F;
+      --badge: #16273D;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #F4F6FA; --surface: #FFFFFF; --raised: #FFFFFF; --line: #E1E6EE;
+        --text: #12151B; --muted: #4A5566; --accent: #1F74E0; --on-accent: #FFFFFF;
+        --badge: #DCE9FB;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 400 17px/1.6 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+    header { padding: 72px 0 40px; }
+    .mark {
+      width: 64px; height: 64px; border-radius: 16px; background: var(--badge);
+      display: grid; place-items: center; margin-bottom: 28px;
+    }
+    h1 {
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 700;
+      font-size: clamp(40px, 8vw, 72px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px;
+    }
+    .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--muted); max-width: 640px; margin: 0 0 32px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px;
+      border-radius: 12px; font-weight: 600; text-decoration: none; font-size: 17px;
+    }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
+    .btn-ghost { border: 1.5px solid var(--line); color: var(--text); }
+    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .note { color: var(--muted); font-size: 14px; margin-top: 14px; }
+
+    .shots {
+      display: flex; gap: 16px; overflow-x: auto; padding: 8px 20px 24px; margin: 0 -20px;
+      scroll-snap-type: x mandatory;
+    }
+    .shots img {
+      width: 220px; height: auto; flex: 0 0 auto; border-radius: 18px;
+      border: 1px solid var(--line); scroll-snap-align: start;
+    }
+
+    section { padding: 48px 0; }
+    h2 { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 26px; margin: 0 0 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 16px; }
+
+    table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 12px; overflow: hidden; }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 16px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; font-size: 14px; }
+    tr:last-child td { border-bottom: 0; }
+    td code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13.5px; word-break: break-all; }
+
+    ol li { margin-bottom: 8px; }
+    footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="mark" aria-hidden="true">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" style="color: var(--accent)"
+           stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 9 L4 17 L12 25 M22 9 L30 17 L22 25"/>
+      </svg>
+    </div>
+    <h1>Tcode Mobile</h1>
+    <p class="lead">A free, open-source code editor for Android. Built for a phone screen and a thumb, and it works without internet.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://github.com/tanim913/tcode-mobile/releases/latest">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16"/></svg>
+        Download for Android
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/tanim913/tcode-mobile">View on GitHub</a>
+    </div>
+    <p class="note">Free. No ads, no sign-up, no tracking. Android 7.0 or newer.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="shots" role="list" aria-label="Screenshots">
+      <img role="listitem" src="readme/screens/editor.png" alt="The editor showing a Dart file with syntax highlighting" width="540" height="1170">
+      <img role="listitem" src="readme/screens/explorer.png" alt="The explorer with a project's folders and files" width="540" height="1170">
+      <img role="listitem" src="readme/screens/run-html.png" alt="An HTML page running inside the app, with its console" width="540" height="1170" loading="lazy">
+      <img role="listitem" src="readme/screens/run-python.png" alt="A Python script run with MicroPython" width="540" height="1170" loading="lazy">
+      <img role="listitem" src="readme/screens/search.png" alt="Searching every file in a project" width="540" height="1170" loading="lazy">
+      <img role="listitem" src="readme/screens/palette.png" alt="The command palette listing every action" width="540" height="1170" loading="lazy">
+      <img role="listitem" src="readme/screens/markdown.png" alt="A Markdown file shown rendered" width="540" height="1170" loading="lazy">
+    </div>
+  </div>
+
+  <section class="wrap" aria-labelledby="why">
+    <h2 id="why">What it does</h2>
+    <div class="grid">
+      <div class="card"><h3>Made for touch</h3><p>Pinch to zoom the code, a row of coding keys above the keyboard, and buttons big enough for a thumb.</p></div>
+      <div class="card"><h3>27 languages</h3><p>Proper colours for Python, JavaScript, HTML, CSS, Dart, Java, Kotlin, C, C++, Go, Rust, PHP and more.</p></div>
+      <div class="card"><h3>Runs your code offline</h3><p>Open a web page with its CSS and JavaScript, or run a Python script, right on the phone with no internet.</p></div>
+      <div class="card"><h3>Hard to lose work</h3><p>Auto-save, unsaved changes that survive the app closing, and older versions of every file you can bring back.</p></div>
+      <div class="card"><h3>Works with GitHub</h3><p>Download a project from GitHub or GitLab, edit it, and send your changes back as a pull request.</p></div>
+      <div class="card"><h3>Private</h3><p>No account and no tracking. Your files stay on your phone. The offline edition asks for no permissions at all.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="install">
+    <h2 id="install">How to install</h2>
+    <ol>
+      <li>Open the <a href="https://github.com/tanim913/tcode-mobile/releases/latest">latest release</a> on your phone.</li>
+      <li>Download the file that ends in <b>arm64-v8a.apk</b>. It works on almost every phone.</li>
+      <li>Open it. If your phone asks, allow your browser to install apps.</li>
+      <li>If Play Protect warns you, tap <b>Install anyway</b>. It says that about any app that is not from the Play Store.</li>
+    </ol>
+    <table>
+      <thead><tr><th>File</th><th>Who it is for</th></tr></thead>
+      <tbody>
+        <tr><td><code>tcode-mobile-…-arm64-v8a.apk</code></td><td><b>Most phones.</b> Start here.</td></tr>
+        <tr><td><code>tcode-mobile-…-armeabi-v7a.apk</code></td><td>Older 32-bit phones, if the first one will not install.</td></tr>
+        <tr><td><code>tcode-mobile-offline-…</code></td><td>The offline edition: no internet and no permissions. It has no GitHub features.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="wrap">
+    <p>Tcode Mobile is open source under the MIT license. The code, the full feature list and the change log are on
+      <a href="https://github.com/tanim913/tcode-mobile">GitHub</a>.</p>
+  </footer>
+</body>
+</html>

@@ -3,6 +3,8 @@
   <img alt="Tcode Mobile: a real code editor for your phone. Offline, touch-first, open source. A phone shows Dart code with syntax highlighting and a row of coding keys." src="docs/readme/banner.svg" width="100%">
 </picture>
 
+# Tcode Mobile
+
 <p>
   <a href="https://github.com/tanim913/tcode-mobile/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/tanim913/tcode-mobile?style=flat-square&label=download&color=4D9FFF&labelColor=12151B"></a>
   <img alt="Android 7.0 and newer" src="https://img.shields.io/badge/Android-7.0%2B-3DDC84?style=flat-square&labelColor=12151B">
@@ -11,7 +13,7 @@
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-F2F4F8?style=flat-square&labelColor=12151B">
 </p>
 
-**Tcode Mobile** is a code editor built for a phone screen and a thumb, not a
+**Tcode Mobile** is a free, open-source code editor for Android, built for a phone screen and a thumb, not a
 desktop editor squeezed onto one. Open a folder, edit with real syntax
 highlighting, search the whole project, run an HTML page or a Python script,
 and send your changes back to GitHub as a pull request. It all runs on the
@@ -20,6 +22,7 @@ telemetry.
 
 <p align="center">
   <a href="https://github.com/tanim913/tcode-mobile/releases/latest"><b>⬇&nbsp; Download the latest APK</b></a>
+  &nbsp;·&nbsp; <a href="https://tanim913.github.io/tcode-mobile/">Website</a>
   &nbsp;·&nbsp; <a href="#install">How to install</a>
   &nbsp;·&nbsp; <a href="#features">All features</a>
 </p>
