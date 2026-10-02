@@ -172,14 +172,15 @@ telemetry.
 ## Install
 
 1. Open the [latest release](https://github.com/tanim913/tcode-mobile/releases/latest)
-   on your phone and download the APK that fits it:
+   on your phone and download the **first APK in the list**, the one without
+   `offline` in its name:
 
    | File | For |
    |---|---|
    | `tcode-mobile-vX.Y.Z-arm64-v8a.apk` | **Almost every phone from the last 7 years.** Start here. |
    | `tcode-mobile-vX.Y.Z-armeabi-v7a.apk` | Older 32-bit phones. |
-   | `tcode-mobile-offline-vX.Y.Z-arm64-v8a.apk` | The offline edition (see below). |
-   | `tcode-mobile-offline-vX.Y.Z-armeabi-v7a.apk` | The offline edition, 32-bit. |
+   | `tcode-mobile-vX.Y.Z-offline-arm64-v8a.apk` | The offline edition (see below). |
+   | `tcode-mobile-vX.Y.Z-offline-armeabi-v7a.apk` | The offline edition, 32-bit. |
 
 2. Open the downloaded file. If Android asks, allow your browser to
    **install unknown apps**.
@@ -213,7 +214,7 @@ CF:B7:DD:71:8B:FE:C5:DE:D0:D9:87:18:0E:69:D9:9D:AE:4F:40:E8:DE:9F:A8:A5:92:97:DF
 ```
 
 Check it with `apksigner verify --print-certs <file>.apk`. Each release also
-lists the SHA-256 of every file in `SHA256SUMS.txt`.
+lists the SHA-256 of every file in `tcode-mobile-vX.Y.Z-sha256sums.txt`.
 
 </details>
 

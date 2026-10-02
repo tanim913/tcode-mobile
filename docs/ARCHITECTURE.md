@@ -30,7 +30,9 @@ under 1000, because split APKs add `1000 × ABI` to it. Every user-visible chang
 gets a line under `## [Unreleased]` in `CHANGELOG.md` when it is made.
 
 `tool/build_release.sh` builds both editions for arm64-v8a and armeabi-v7a into
-`dist/vX.Y.Z/`, named by version, with `SHA256SUMS.txt`. Release builds are
+`dist/vX.Y.Z/`, named by version, with a `-sha256sums.txt`. GitHub lists
+release files alphabetically and cannot reorder them, so the names make the
+standard arm64 APK sort first and the offline ones after it. Release builds are
 signed by the key in `~/.tcode-release/key.properties` (or `$TCODE_SIGNING`),
 and fall back to the debug key when it is absent. A debug-signed APK cannot
 update an official release, so the script warns.

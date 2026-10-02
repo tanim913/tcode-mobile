@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # Builds the release APKs for the version in pubspec.yaml and collects them,
-# named by version, in dist/vX.Y.Z/ together with SHA256SUMS.txt.
+# named by version, in dist/vX.Y.Z/ together with their SHA-256 sums.
+#
+# GitHub lists release files alphabetically and cannot reorder them, so the
+# names are chosen to sort the file most people need first:
+#   tcode-mobile-v1.2.3-arm64-v8a.apk            standard, most phones
+#   tcode-mobile-v1.2.3-armeabi-v7a.apk          standard, older phones
+#   tcode-mobile-v1.2.3-offline-arm64-v8a.apk    offline edition
+#   tcode-mobile-v1.2.3-offline-armeabi-v7a.apk
+#   tcode-mobile-v1.2.3-sha256sums.txt
 #
 #   tool/build_release.sh            # both editions, arm64-v8a and armeabi-v7a
 #
@@ -30,13 +38,13 @@ APKS=build/app/outputs/flutter-apk
 for FLAVOR in full play; do
   flutter build apk --release --flavor "$FLAVOR" --split-per-abi \
     --target-platform android-arm,android-arm64
-  NAME=tcode-mobile; [ "$FLAVOR" = play ] && NAME=tcode-mobile-offline
+  EDITION=""; [ "$FLAVOR" = play ] && EDITION="offline-"
   for ABI in arm64-v8a armeabi-v7a; do
-    cp "$APKS/app-$ABI-$FLAVOR-release.apk" "$OUT/$NAME-v$VERSION-$ABI.apk"
+    cp "$APKS/app-$ABI-$FLAVOR-release.apk" "$OUT/tcode-mobile-v$VERSION-$EDITION$ABI.apk"
   done
 done
 
-(cd "$OUT" && sha256sum ./*.apk | sed 's# \./# #' > SHA256SUMS.txt)
+(cd "$OUT" && sha256sum ./*.apk | sed 's# \./# #' > "tcode-mobile-v$VERSION-sha256sums.txt")
 echo
 echo "Built v$VERSION (build $BUILD) in $OUT:"
 ls -lh "$OUT"
